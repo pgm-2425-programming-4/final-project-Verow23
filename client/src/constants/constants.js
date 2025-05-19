@@ -1,0 +1,4 @@
+export const API_URL = "http://localhost:3000/api";
+export const API_TOKEN =
+    "e687e04273c63d5c79241cb5422522c6770357c98aac293df1960da388f6eebb69d6702ff6538cd1f7cd04d3e924f6929a73ea1ac92226fb4b67d096de44103dcba058bfa119668c2f9b04cd635d3dbc7c3aee54c1e1863d39f3754ba255f5c2c3a87801d9d607ce8a193dce8baa8abaae5464cb5ddaf41034e11f563b65a067";
+export const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
