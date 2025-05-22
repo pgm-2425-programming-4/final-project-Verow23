@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
 import { getProjects } from "../../data/getProjects"
+import { Sidebar } from "./Sidebar"
+import { PaginatedBacklog } from "./paginated-backlog/paginated-backlog"
 
 export function HomePage() {
     const { projects, setProjects } = useState([])
-    const { isPending, isError, error, data } = useQuery({
+    const { isPending, isError, error, data: responseData } = useQuery({
         queryKey: ["projects"]
         , queryFn: () => getProjects()
     })
 
     useEffect(() => {
-        if (data) {
-            setProjects(data)
+        if (responseData) {
+            setProjects(responseData.data)
+            console.log(projects);
+
         }
     })
 

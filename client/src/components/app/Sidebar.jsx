@@ -1,4 +1,5 @@
 export function Sidebar({ projects }) {
+    console.log(projects)
     return (
         <>
             <h2>Projects</h2>
