@@ -42,8 +42,6 @@ export function PaginatedBacklog() {
         return <span>Error: {error.message}</span>
     }
 
-    console.log(backlog)
-
     return (
         <>
             <Backlog backlog={backlog} />

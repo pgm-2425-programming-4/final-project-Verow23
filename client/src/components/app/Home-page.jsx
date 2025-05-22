@@ -5,7 +5,7 @@ import { Sidebar } from "./Sidebar"
 import { PaginatedBacklog } from "./paginated-backlog/paginated-backlog"
 
 export function HomePage() {
-    const { projects, setProjects } = useState([])
+    const [projects, setProjects] = useState([])
     const { isPending, isError, error, data: responseData } = useQuery({
         queryKey: ["projects"]
         , queryFn: () => getProjects()
@@ -13,11 +13,10 @@ export function HomePage() {
 
     useEffect(() => {
         if (responseData) {
-            setProjects(responseData.data)
+            setProjects(responseData.data);
             console.log(projects);
-
         }
-    })
+    }, [responseData, projects])
 
     if (isPending) {
         return <span>Loading...</span>

@@ -4,7 +4,7 @@ export function Sidebar({ projects }) {
         <>
             <h2>Projects</h2>
             <ul>
-                {projects.map(project => { <li key={project.id} >{project.Title}</li> })}
+                {projects.map(project => { return <li key={project.id} >{project.Title}</li> })}
             </ul>
         </>
     )
