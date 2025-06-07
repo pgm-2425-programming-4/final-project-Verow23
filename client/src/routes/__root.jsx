@@ -42,6 +42,7 @@ export const Route = createRootRoute({
                             Home
                         </Link>{' '}
                         <DynamicRoutes />
+                        <h2>Info</h2>
                         <Link to="/about" className="[&.active]:font-bold">
                             About
                         </Link>

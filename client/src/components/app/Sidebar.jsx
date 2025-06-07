@@ -7,7 +7,7 @@ export function Sidebar({ projects }) {
             <h2>Projects</h2>
 
             {projects.map(project => {
-                return <Link to={`/projects/${project.id}`} className="[&.active]:font-bold" key={project.id}>
+                return <Link to={`/projects/${project.slug}`} className="[&.active]:font-bold" key={project.id}>
                     {project.Title}
                 </Link>
             })}

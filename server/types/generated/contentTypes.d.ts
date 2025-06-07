@@ -402,6 +402,7 @@ export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: "projects";
   info: {
+    description: "";
     displayName: "Project";
     pluralName: "projects";
     singularName: "project";
@@ -420,6 +421,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"Title">;
     tasks: Schema.Attribute.Relation<"oneToMany", "api::task.task">;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

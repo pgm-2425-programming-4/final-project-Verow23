@@ -9,6 +9,11 @@ export async function getTasks(page, pageSize) {
       },
     },
   );
+  if (!result.ok) {
+    throw new Error(
+      `Failed to fetch tasks: ${result.status} ${result.statusText}`
+    );
+  }
   const data = await result.json();
   return data;
 }
