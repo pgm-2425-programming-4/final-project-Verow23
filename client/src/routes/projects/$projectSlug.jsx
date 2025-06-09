@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { getProjectsBySlug } from '../../queries/getProjectsBySlug'
 
 export const Route = createFileRoute('/projects/$projectSlug')({
@@ -23,6 +23,8 @@ function RouteComponent() {
       <ul>
         {data.data[0].tasks.map(task => <li key={task.id} > {task.Title} </li>)}
       </ul>
+      <button><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: data.data[0].slug }} >Backlog</Link></button>
+
     </>
   )
 }
