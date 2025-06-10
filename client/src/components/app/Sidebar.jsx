@@ -1,17 +1,40 @@
-import { Link } from "@tanstack/react-router"
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { getProjects } from "../../queries/getProjects";
+import { DynamicRoutes } from "./DynamicRoutes";
+import { Link } from "@tanstack/react-router";
 
-export function Sidebar({ projects }) {
-    console.log(projects)
-    return (
-        <>
-            <h2>Projects</h2>
+export function Sidebar() {
+    const [projects, setProjects] = useState([])
+    const { isPending, isError, error, data: responseData } = useQuery({
+        queryKey: ["projects"]
+        , queryFn: () => getProjects()
+    })
 
-            {projects.map(project => {
-                return <Link to={`/projects/${project.slug}`} className="[&.active]:font-bold" key={project.id}>
-                    {project.Title}
-                </Link>
-            })}
+    useEffect(() => {
+        if (responseData) {
+            setProjects(responseData.data);
+            console.log(projects);
+        }
+    }, [responseData, projects])
 
-        </>
+    if (isPending) {
+        return <span>Loading...</span>
+    }
+
+    if (isError) {
+        return <span>Error: {error.message}</span>
+    }
+
+    return (<aside className="p-2 flex gap-2">
+        <Link to="/" className="[&.active]:font-bold">
+            Home
+        </Link>{' '}
+        < DynamicRoutes projects={projects} />
+        <h2>Info</h2>
+        <Link to="/about" className="[&.active]:font-bold">
+            About
+        </Link>
+    </aside>
     )
 }
