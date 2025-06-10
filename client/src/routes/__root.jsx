@@ -37,18 +37,19 @@ export const Route = createRootRoute({
         return (
             <>
                 <QueryClientProvider client={queryClient}>
-                    <div className="p-2 flex gap-2">
-                        <Link to="/" className="[&.active]:font-bold">
-                            Home
-                        </Link>{' '}
-                        <DynamicRoutes />
-                        <h2>Info</h2>
-                        <Link to="/about" className="[&.active]:font-bold">
-                            About
-                        </Link>
+                    <div className="home" >
+                        <aside className="p-2 flex gap-2">
+                            <Link to="/" className="[&.active]:font-bold">
+                                Home
+                            </Link>{' '}
+                            <DynamicRoutes />
+                            <h2>Info</h2>
+                            <Link to="/about" className="[&.active]:font-bold">
+                                About
+                            </Link>
+                        </aside>
+                        <Outlet />
                     </div>
-                    <hr />
-                    <Outlet />
                     <TanStackRouterDevtools />
                 </QueryClientProvider>
             </>)
