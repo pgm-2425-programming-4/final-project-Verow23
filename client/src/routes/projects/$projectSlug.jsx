@@ -22,11 +22,6 @@ function RouteComponent() {
 
   return (
     <>
-      {/* <h1>Active project {data.data[0].project.Title}</h1>
-      <ul>
-        {data.data.map(task => <li key={task.id} > {task.Title} </li>)}
-      </ul>
-      <button><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: data.data[0].project.slug }} >Backlog</Link></button> */}
       <Board tasks={data.data} />
     </>
   )
