@@ -24,11 +24,13 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
 
     async function handleSubmit() {
         const data = {
-            Title: form.title,
-            Description: form.description,
-            state: form.state,
-            labels: form.labels,
-            project
+            data: {
+                Title: form.title,
+                Description: form.description,
+                state: form.state,
+                labels: form.labels,
+                project: project.id,
+            }
         };
         if (task?.id) {
             await fetch(
@@ -42,11 +44,14 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                 },
             );
             onUpdate();
+            console.log(data);
+
         } else {
             await fetch(
                 `${API_URL}/tasks`,
                 {
                     headers: {
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${API_TOKEN}`,
                     },
                     method: 'POST',
@@ -54,6 +59,8 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                 },
             );
             onUpdate();
+            console.log(data);
+
         }
     }
 
@@ -72,18 +79,16 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
         }
     }
 
-    console.log(labels);
-
-
     return (
         <div className="modal-container">
             <div>
-                <p>{project}</p>
+                <p>{project.Title}</p>
                 <h2>{task ? "Edit task" : "New task"}</h2>
                 <input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
                 <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description"></textarea>
-                <select name="state" value={form.state} onChange={handleChange}>
-                    {states.map(state => (<option key={state.id}>{state.Title}</option>))}
+                <select required name="state" value={form.state} onChange={handleChange}>
+                    <option disabled value="">Select your status</option>
+                    {states.map(state => (<option key={state.id} value={state.id}>{state.Title}</option>))}
                 </select>
                 <div>
                     <label>Labels</label>

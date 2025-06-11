@@ -60,7 +60,7 @@ export function Board({ tasks, projectSlug }) {
                 })}
             </div>
             {
-                showModal && <TaskModal project={taskList[0].project.Title} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
+                showModal && <TaskModal project={taskList[0].project} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
             }
         </main>
 
