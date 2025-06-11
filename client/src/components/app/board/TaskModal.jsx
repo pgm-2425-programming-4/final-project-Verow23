@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { API_TOKEN, API_URL } from "../../../constants/constants";
 
-export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels }) {
+export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, project }) {
     const [form, setForm] = useState({
         title: task?.Title || "",
         description: task?.Description || "",
         state: task?.state?.id || "",
-        labels: task?.labels?.map(label => label.id) || []
+        labels: task?.labels?.map(label => label.id) || [],
+        project
     })
 
     function handleChange(e) {
@@ -27,10 +28,11 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels })
             Description: form.description,
             state: form.state,
             labels: form.labels,
+            project
         };
         if (task?.id) {
             await fetch(
-                `${API_URL}/tasks?populate=*`,
+                `${API_URL}/tasks/${task.documentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${API_TOKEN}`,
@@ -42,7 +44,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels })
             onUpdate();
         } else {
             await fetch(
-                `${API_URL}/tasks?populate=*`,
+                `${API_URL}/tasks`,
                 {
                     headers: {
                         Authorization: `Bearer ${API_TOKEN}`,
@@ -58,7 +60,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels })
     async function handleDelete() {
         if (task?.id) {
             await fetch(
-                `${API_URL}/tasks?populate=*`,
+                `${API_URL}/tasks/${task.documentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${API_TOKEN}`,
@@ -76,6 +78,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels })
     return (
         <div className="modal-container">
             <div>
+                <p>{project}</p>
                 <h2>{task ? "Edit task" : "New task"}</h2>
                 <input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
                 <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description"></textarea>
