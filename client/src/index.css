@@ -37,3 +37,8 @@
 .link {
   color: white;
 }
+
+.line {
+  margin: 0 2rem;
+  border: .0625rem solid hsl(0, 0%, 71%);
+}
