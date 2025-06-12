@@ -117,9 +117,14 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                     <footer className="modal-card-foot">
                         <div className="buttons">
 
-                            <button onClick={handleSubmit} className="button is-success" >Save</button>
+                            <button onClick={handleSubmit} className="button is-success" >
+                                <span class="icon is-small">
+                                    <i class="fas fa-check"></i>
+                                </span><span>Save</span></button>
                             <button onClick={onClose} className="button" >Cancel</button>
-                            {task?.id && <button onClick={handleDelete} className="button is-danger">Delete</button>}
+                            {task?.id && <button onClick={handleDelete} className="button is-danger"><span>Delete</span> <span class="icon is-small">
+                                <i class="fas fa-times"></i>
+                            </span></button>}
 
                         </div>
                     </footer>
