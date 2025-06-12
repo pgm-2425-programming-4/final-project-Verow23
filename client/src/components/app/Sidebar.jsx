@@ -14,9 +14,8 @@ export function Sidebar() {
     useEffect(() => {
         if (responseData) {
             setProjects(responseData.data);
-            console.log(projects);
         }
-    }, [responseData, projects])
+    }, [responseData])
 
     if (isPending) {
         return <span>Loading...</span>
@@ -27,14 +26,16 @@ export function Sidebar() {
     }
 
     return (<aside className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-            Home
-        </Link>{' '}
-        < DynamicRoutes projects={projects} />
-        <h2>Info</h2>
-        <Link to="/about" className="[&.active]:font-bold">
-            About
-        </Link>
+        <nav>
+            <Link to="/" className="[&.active]:font-bold">
+                Home
+            </Link>{' '}
+            < DynamicRoutes projects={projects} />
+            <h2>Info</h2>
+            <Link to="/about" className="[&.active]:font-bold">
+                About
+            </Link>
+        </nav>
     </aside>
     )
 }

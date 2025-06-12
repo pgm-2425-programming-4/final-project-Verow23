@@ -5,8 +5,8 @@ import { Board } from '../../components/app/board/Board';
 export const Route = createFileRoute('/projects/$projectSlug')({
   loader: async ({ params }) => {
     const slug = params.projectSlug
-    const data = await getTasksByProject(slug);
-    if (!data) {
+    const data = await getTasksByProject(params.projectSlug);
+    if (!data || !Array.isArray(data.data)) {
       throw notFound();
     }
     return [data, slug];
@@ -18,8 +18,6 @@ export const Route = createFileRoute('/projects/$projectSlug')({
 function RouteComponent() {
   const [data, slug] = Route.useLoaderData()
   console.log(data);
-  // const [tasks, setTasks] = useState([]);
-  // setTasks(data.data);                          --->> vragen of ik dit moet gebruiken
 
   return (
     <>

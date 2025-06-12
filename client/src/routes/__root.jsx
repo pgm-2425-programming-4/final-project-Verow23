@@ -7,6 +7,7 @@ import { Sidebar } from '../components/app/Sidebar';
 const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
+    errorComponent: () => <div>Oops! Something went wrong.</div>,
     component: () => {
         return (
             <>

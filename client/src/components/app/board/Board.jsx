@@ -14,16 +14,18 @@ export function Board({ tasks, projectSlug }) {
     const [statuses, setStatuses] = useState([])
     const [labels, setLabels] = useState()
 
+    useEffect(() => {
+        getLabels().then(setLabels)
+        setTaskList(tasks)
+    }, [tasks, projectSlug])
+
+
     async function refreshTasks() {
         const updated = await getTasksByProject(projectSlug);
         setTaskList(updated.data)
         setShowModal(false)
         setSelectedTask(null)
     }
-
-    useEffect(() => {
-        getLabels().then(setLabels)
-    }, [])
 
     const { isPending, isError, error, data } = useQuery({
         queryKey: ["statuses"],
@@ -45,24 +47,33 @@ export function Board({ tasks, projectSlug }) {
         return <span>Error: {error.message}</span>;
     }
 
-    return (
+    try {
+        return (
 
-        <main className='board'>
-            <h1>Active project {taskList[0].project.Title}</h1>
-            <button onClick={() => { setSelectedTask(null); setShowModal(true); }} className="bg-green-500 text-white px-4 py-2 rounded mr-2">Add new task</button>
-            <button className="backlog-button"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} >Backlog</Link></button>
-            <div className='columns' >
-                {statuses.map(status => {
-                    if (status.Title !== "Backlog") {
-                        return (
-                            <Column key={status.id} status={status} tasks={taskList.filter(task => task.state?.id === status.id)} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />)
-                    }
-                })}
-            </div>
-            {
-                showModal && <TaskModal project={taskList[0].project} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
-            }
-        </main>
+            <main className='board'>
+                {taskList?.length > 0 ? (
+                    <h1>Active project {taskList[0].project.Title}</h1>
+                ) : (
+                    <h1>Loading project...</h1>
+                )}
+                <button onClick={() => { setSelectedTask(null); setShowModal(true); }}>Add new task</button>
+                <button className="backlog-button"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} >Backlog</Link></button>
+                <div className='columns' >
+                    {statuses.map(status => {
+                        if (status.Title !== "Backlog") {
+                            return (
+                                <Column key={status.id} status={status} tasks={taskList.filter(task => task.state?.id === status.id)} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />)
+                        }
+                    })}
+                </div>
+                {
+                    showModal && <TaskModal project={taskList[0].project} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
+                }
+            </main>
 
-    )
+        )
+    } catch (e) {
+        console.log("Rendering error in Board:", e);
+        return <div>Board failed to render</div>
+    }
 }

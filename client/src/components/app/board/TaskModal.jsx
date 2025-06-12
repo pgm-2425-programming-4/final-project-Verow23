@@ -105,9 +105,9 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                 </div>
                 <div>
                     {task?.id && <button onClick={handleDelete}>Delete</button>}
-                    <div className="flex gap-2">
-                        <button onClick={onClose} className="bg-gray-300 px-4 py-2 rounded">Cancel</button>
-                        <button onClick={handleSubmit} className="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+                    <div>
+                        <button onClick={onClose} >Cancel</button>
+                        <button onClick={handleSubmit} >Save</button>
                     </div>
                 </div>
             </div>
