@@ -46,10 +46,8 @@ export function PaginatedBacklog({ projectSlug }) {
     return <span>Error: {error.message}</span>;
   }
 
-  console.log(backlog);
-
   return (
-    <>
+    <div className="container">
       <Backlog backlog={backlog} />
       <Pagination
         currentPage={currentPage}
@@ -58,6 +56,6 @@ export function PaginatedBacklog({ projectSlug }) {
         onPageChanged={handlePageChanged}
         onSizeChanged={handleSizeChanged}
       />
-    </>
+    </div>
   );
 }
