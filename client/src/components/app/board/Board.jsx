@@ -13,6 +13,8 @@ export function Board({ tasks, projectSlug }) {
     const [taskList, setTaskList] = useState(tasks)
     const [statuses, setStatuses] = useState([])
     const [labels, setLabels] = useState()
+    const [search, setSearch] = useState("")
+    const [filterLabel, setFilterLabel] = useState("")
 
     useEffect(() => {
         getLabels().then(setLabels)
@@ -47,22 +49,39 @@ export function Board({ tasks, projectSlug }) {
         return <span>Error: {error.message}</span>;
     }
 
+    const filteredTasks = taskList.filter(task => {
+        const matchesSearch = task.Title.toLowerCase().includes(search.toLowerCase());
+        const matchesLabel = filterLabel ? task.labels.some(label => label.id === parseInt(filterLabel)) : true;
+        return matchesLabel && matchesSearch
+    })
+
     try {
         return (
 
             <main className='board'>
+                <header>
+                    <div>
+                        <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search tasks" />
+                        <select value={filterLabel} onChange={e => setFilterLabel(e.target.value)}>
+                            <option value="">All Labels</option>
+                            {labels.data.map(label => (
+                                <option key={label.id} value={label.id}>{label.Title}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <button onClick={() => { setSelectedTask(null); setShowModal(true); }}>Add new task</button>
+                    <button className="backlog-button"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} >Backlog</Link></button>
+                </header>
                 {taskList?.length > 0 ? (
                     <h1>Active project {taskList[0].project.Title}</h1>
                 ) : (
                     <h1>Loading project...</h1>
                 )}
-                <button onClick={() => { setSelectedTask(null); setShowModal(true); }}>Add new task</button>
-                <button className="backlog-button"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} >Backlog</Link></button>
                 <div className='columns' >
                     {statuses.map(status => {
                         if (status.Title !== "Backlog") {
                             return (
-                                <Column key={status.id} status={status} tasks={taskList.filter(task => task.state?.id === status.id)} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />)
+                                <Column key={status.id} status={status} tasks={filteredTasks.filter(task => task.state?.id === status.id)} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />)
                         }
                     })}
                 </div>
