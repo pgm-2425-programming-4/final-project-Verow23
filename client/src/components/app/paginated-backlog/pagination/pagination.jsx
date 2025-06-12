@@ -64,7 +64,7 @@ export function Pagination({
   });
 
   return (
-    <nav className="pagination" role="navigation" aria-label="pagination">
+    <div className="pagination" role="navigation" aria-label="pagination">
       <div className="select">
         <select
           defaultValue={pageSize}
@@ -96,6 +96,6 @@ export function Pagination({
       </button>
 
       <ul className="pagination-list">{pageLinks}</ul>
-    </nav>
+    </div>
   );
 }

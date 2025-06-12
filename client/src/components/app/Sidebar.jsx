@@ -26,15 +26,19 @@ export function Sidebar() {
     }
 
     return (<aside className="p-2 flex gap-2">
-        <nav>
-            <Link to="/" className="[&.active]:font-bold">
-                Home
-            </Link>{' '}
+        <nav className="menu">
+            <ul className="menu-list">
+                <Link to="/" className="[&.is-active]:font-bold">
+                    Home
+                </Link>{' '}
+            </ul>
             < DynamicRoutes projects={projects} />
-            <h2>Info</h2>
-            <Link to="/about" className="[&.active]:font-bold">
-                About
-            </Link>
+            <p className="menu-label">Info</p>
+            <ul className="menu-list">
+                <Link to="/about" className="[&.is-active]:font-bold">
+                    About
+                </Link>
+            </ul>
         </nav>
     </aside>
     )

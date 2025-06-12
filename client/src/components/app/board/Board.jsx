@@ -59,25 +59,28 @@ export function Board({ tasks, projectSlug }) {
         return (
 
             <main className='board'>
-                <header>
-                    <div>
-                        <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search tasks" />
-                        <select value={filterLabel} onChange={e => setFilterLabel(e.target.value)}>
-                            <option value="">All Labels</option>
-                            {labels.data.map(label => (
-                                <option key={label.id} value={label.id}>{label.Title}</option>
-                            ))}
-                        </select>
+                <header className="navbar-end">
+                    <div className="is-flex mx-1">
+                        <input className="input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search tasks" />
+                        <div className="select mx-1">
+                            <select value={filterLabel} onChange={e => setFilterLabel(e.target.value)}>
+                                <option value="">All Labels</option>
+                                {labels.data.map(label => (
+                                    <option key={label.id} value={label.id}>{label.Title}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                    <button onClick={() => { setSelectedTask(null); setShowModal(true); }}>Add new task</button>
-                    <button className="backlog-button"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} >Backlog</Link></button>
+                    <button onClick={() => { setSelectedTask(null); setShowModal(true); }} className="button is-primary mx-1">Add new task</button>
+                    <button className="button is-link mx-1"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} className="link">Backlog</Link></button>
                 </header>
                 {taskList?.length > 0 ? (
-                    <h1>Active project {taskList[0].project.Title}</h1>
+                    <h1 className="title has-text-left">Active project {taskList[0].project.Title}</h1>
                 ) : (
-                    <h1>Loading project...</h1>
+                    <h1 className="title has-text-left">Loading project...</h1>
                 )}
-                <div className='columns' >
+
+                <div className='columns is-mobile message' >
                     {statuses.map(status => {
                         if (status.Title !== "Backlog") {
                             return (
@@ -86,7 +89,7 @@ export function Board({ tasks, projectSlug }) {
                     })}
                 </div>
                 {
-                    showModal && <TaskModal project={taskList[0].project} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
+                    showModal && <TaskModal className={(showModal) ? "is-active" : ""} project={taskList[0].project} task={selectedTask} states={statuses} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
                 }
             </main>
 

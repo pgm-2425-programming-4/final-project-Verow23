@@ -14,6 +14,7 @@ export const Route = createRootRoute({
                 <QueryClientProvider client={queryClient}>
                     <div className="home" >
                         <Sidebar />
+                        <div className='line'></div>
                         <Outlet />
                     </div>
                     <TanStackRouterDevtools />
