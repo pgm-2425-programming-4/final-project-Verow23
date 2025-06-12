@@ -29,3 +29,7 @@
 .modal-card-foot {
   justify-content: space-around;
 }
+
+.modal-card {
+  margin-top: 2rem;
+}

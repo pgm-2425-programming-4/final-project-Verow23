@@ -4,13 +4,14 @@ export function DynamicRoutes({ projects }) {
     console.log(projects)
     return (
         <>
-            <h2>Projects</h2>
-
-            {projects.map(project => {
-                return <Link to={`/projects/${project.slug}`} className="[&.active]:font-bold" key={project.id}>
-                    {project.Title}
-                </Link>
-            })}
+            <p className="menu-label">Projects</p>
+            <ul className="menu-list">
+                {projects.map(project => {
+                    return <Link to={`/projects/${project.slug}`} className="[&.is-active]:font-bold" key={project.id}>
+                        {project.Title}
+                    </Link>
+                })}
+            </ul>
 
         </>
     )
