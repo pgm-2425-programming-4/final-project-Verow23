@@ -37,6 +37,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                 `${API_URL}/tasks/${task.documentId}`,
                 {
                     headers: {
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${API_TOKEN}`,
                     },
                     method: 'PUT',
@@ -59,8 +60,6 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                 },
             );
             onUpdate();
-            console.log(data);
-
         }
     }
 
