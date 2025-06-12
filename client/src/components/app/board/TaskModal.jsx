@@ -86,19 +86,24 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                         <p className="modal-card-title">{project.Title}</p>
                     </header>
                     <section className="modal-card-body">
-                        <h2>{task ? "Edit task" : "New task"}</h2>
+                        <h2 className="subtitle">{task ? "Edit task" : "New task"}</h2>
                         <div className="form">
-                            <input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
-                            <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description"></textarea>
-                            <select required name="state" value={form.state} onChange={handleChange}>
-                                <option disabled value="">Select your status</option>
-                                {states.map(state => (<option key={state.id} value={state.id}>{state.Title}</option>))}
-                            </select>
+                            <label className="label">Title</label>
+                            <input className="input" name="title" value={form.title} onChange={handleChange} placeholder="Title" />
+                            <label className="label">Description</label>
+                            <textarea className="textarea" name="description" value={form.description} onChange={handleChange} placeholder="Description"></textarea>
+                            <label className="label">Status</label>
+                            <div className="control">
+                                <div className="select">
+                                    <select required name="state" value={form.state} onChange={handleChange}>
+                                        <option disabled value="">Select your status</option>
+                                        {states.map(state => (<option key={state.id} value={state.id}>{state.Title}</option>))}
+                                    </select></div></div>
                             <div>
-                                <label>Labels</label>
-                                <div>
-                                    {labels.data.map(label => (<label key={label.id}>
-                                        <input
+                                <label className="label">Labels</label>
+                                <div >
+                                    {labels.data.map(label => (<label className="checkbox" key={label.id}>
+                                        <input className="mx-1"
                                             type="checkbox"
                                             checked={form.labels.includes(label.id)}
                                             onChange={() => toggleLabel(label.id)}
