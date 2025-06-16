@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "./pagination/pagination";
-import { Backlog } from "./backlog/Backlog";
+import { Backlog } from "./backlog/backlog";
 import { getTasksForBacklog } from "../../../queries/getTasksForBacklog";
 
 export function PaginatedBacklog({ projectSlug }) {
