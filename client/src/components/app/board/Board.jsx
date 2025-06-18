@@ -80,7 +80,7 @@ export function Board({ tasks, projectSlug }) {
                     <h1 className="title has-text-left">Loading project...</h1>
                 )}
 
-                <div className='columns is-mobile message' >
+                <div className='columns message' >
                     {statuses.map(status => {
                         if (status.Title !== "Backlog") {
                             return (
