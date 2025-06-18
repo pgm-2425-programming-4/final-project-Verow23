@@ -22,6 +22,11 @@
   flex-direction: column;
 }
 
+.card {
+  padding: 2em;
+  text-align: center;
+}
+
 .modal-card-foot {
   justify-content: space-around;
 }

@@ -75,7 +75,7 @@ export function Board({ tasks, projectSlug }) {
                     <button className="button is-link m-1"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} className="link">Backlog</Link></button>
                 </header>
                 {taskList?.length > 0 ? (
-                    <h1 className="title has-text-left">Active project {taskList[0].project.Title}</h1>
+                    <h1 className="title has-text-left">Active project: {taskList[0].project.Title}</h1>
                 ) : (
                     <h1 className="title has-text-left">Loading project...</h1>
                 )}
