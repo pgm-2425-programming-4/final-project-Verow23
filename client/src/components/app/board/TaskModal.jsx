@@ -9,6 +9,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
         labels: task?.labels?.map(label => label.id) || [],
         project
     })
+    const [errors, setErrors] = useState({})
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -23,44 +24,60 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
     }
 
     async function handleSubmit() {
-        const data = {
-            data: {
-                Title: form.title,
-                Description: form.description,
-                state: form.state,
-                labels: form.labels,
-                project: project.id,
-            }
-        };
-        if (task?.id) {
-            await fetch(
-                `${API_URL}/tasks/${task.documentId}`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${API_TOKEN}`,
+        if (validateForm()) {
+            const data = {
+                data: {
+                    Title: form.title,
+                    Description: form.description,
+                    state: form.state,
+                    labels: form.labels,
+                    project: project.id,
+                }
+            };
+            if (task?.id) {
+                await fetch(
+                    `${API_URL}/tasks/${task.documentId}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${API_TOKEN}`,
+                        },
+                        method: 'PUT',
+                        body: JSON.stringify(data),
                     },
-                    method: 'PUT',
-                    body: JSON.stringify(data),
-                },
-            );
-            onUpdate();
-            console.log(data);
+                );
+                onUpdate();
+                console.log(data);
 
-        } else {
-            await fetch(
-                `${API_URL}/tasks`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${API_TOKEN}`,
+            } else {
+                await fetch(
+                    `${API_URL}/tasks`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${API_TOKEN}`,
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(data),
                     },
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                },
-            );
-            onUpdate();
+                );
+                onUpdate();
+            }
         }
+    }
+
+    function validateForm() {
+        const newErrors = {}
+        if (!form.title.trim()) {
+            newErrors.title = 'Title is required'
+        }
+
+        if (!form.state) {
+            newErrors.state = 'State must be selected'
+        }
+
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
     }
 
     async function handleDelete() {
@@ -90,6 +107,7 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                         <div className="form">
                             <label className="label">Title</label>
                             <input className="input" name="title" value={form.title} onChange={handleChange} placeholder="Title" />
+                            {errors.title && <p className="has-text-danger"><span className="icon is-small"><i className="fa-solid fa-circle-exclamation"></i></span>{errors.title}</p>}
                             <label className="label">Description</label>
                             <textarea className="textarea" name="description" value={form.description} onChange={handleChange} placeholder="Description"></textarea>
                             <label className="label">Status</label>
@@ -98,7 +116,9 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                                     <select required name="state" value={form.state} onChange={handleChange}>
                                         <option disabled value="">Select your status</option>
                                         {states.map(state => (<option key={state.id} value={state.id}>{state.Title}</option>))}
-                                    </select></div></div>
+                                    </select></div>
+                                {errors.state && <p className="has-text-danger"><span className="icon is-small"><i className="fa-solid fa-circle-exclamation"></i></span>{errors.state}</p>}
+                            </div>
                             <div>
                                 <label className="label">Labels</label>
                                 <div >
@@ -118,12 +138,12 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                         <div className="buttons">
 
                             <button onClick={handleSubmit} className="button is-success" >
-                                <span class="icon is-small">
-                                    <i class="fas fa-check"></i>
+                                <span className="icon is-small">
+                                    <i className="fas fa-check"></i>
                                 </span><span>Save</span></button>
                             <button onClick={onClose} className="button" >Cancel</button>
-                            {task?.id && <button onClick={handleDelete} className="button is-danger"><span>Delete</span> <span class="icon is-small">
-                                <i class="fas fa-times"></i>
+                            {task?.id && <button onClick={handleDelete} className="button is-danger"><span>Delete</span> <span className="icon is-small">
+                                <i className="fas fa-times"></i>
                             </span></button>}
 
                         </div>
