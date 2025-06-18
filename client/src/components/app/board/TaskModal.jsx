@@ -47,7 +47,6 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
                     },
                 );
                 onUpdate();
-                console.log(data);
 
             } else {
                 await fetch(

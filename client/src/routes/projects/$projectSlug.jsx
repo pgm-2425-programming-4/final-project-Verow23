@@ -17,11 +17,8 @@ export const Route = createFileRoute('/projects/$projectSlug')({
 
 function RouteComponent() {
   const [data, slug] = Route.useLoaderData()
-  console.log(data);
 
   return (
-    <>
-      <Board tasks={data.data} projectSlug={slug} />
-    </>
+    <Board tasks={data.data} projectSlug={slug} />
   )
 }

@@ -68,7 +68,7 @@ export function Pagination({
       <div className="select select-backlog-pagination">
         <select
           defaultValue={pageSize}
-          onChange={() => onSizeChanged(event.target.value)}
+          onChange={(event) => onSizeChanged(event.target.value)}
         >
           {PAGE_SIZE_OPTIONS.map((option) => {
             return (

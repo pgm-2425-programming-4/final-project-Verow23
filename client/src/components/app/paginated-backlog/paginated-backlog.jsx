@@ -62,9 +62,6 @@ export function PaginatedBacklog({ projectSlug }) {
     setSelectedTask(null)
   }
 
-  console.log(statuses);
-
-
   return (<>
     <div className="container">
       <Backlog backlog={backlog} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />

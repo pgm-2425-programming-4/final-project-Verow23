@@ -95,7 +95,7 @@ export function Board({ tasks, projectSlug }) {
 
         )
     } catch (e) {
-        console.log("Rendering error in Board:", e);
-        return <div>Board failed to render</div>
+        if (e)
+            return <div>Board failed to render</div>
     }
 }
