@@ -15,7 +15,7 @@ export function PaginatedBacklog({ projectSlug }) {
   const [labels, setLabels] = useState();
   const [statuses, setStatuses] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null)
+  const [selectedTask, setSelectedTask] = useState(null);
 
   function handlePageChanged(pageNumber) {
     setCurrentPage(pageNumber);
@@ -36,8 +36,8 @@ export function PaginatedBacklog({ projectSlug }) {
   });
 
   useEffect(() => {
-    getLabels().then(setLabels)
-    getStatuses().then(setStatuses)
+    getLabels().then(setLabels);
+    getStatuses().then(setStatuses);
     if (responseData) {
       if (currentPage > responseData.meta.pagination.pageCount) {
         setCurrentPage(responseData.meta.pagination.pageCount);
@@ -56,26 +56,46 @@ export function PaginatedBacklog({ projectSlug }) {
   }
 
   async function refreshTasks() {
-    const updated = await getTasksForBacklog(projectSlug, currentPage, pageSize);
-    setBacklog(updated.data)
-    setShowModal(false)
-    setSelectedTask(null)
+    const updated = await getTasksForBacklog(
+      projectSlug,
+      currentPage,
+      pageSize,
+    );
+    setBacklog(updated.data);
+    setShowModal(false);
+    setSelectedTask(null);
   }
 
-  return (<>
-    <div className="container">
-      <Backlog backlog={backlog} onTaskClick={(task) => { setSelectedTask(task); setShowModal(true) }} />
-      <Pagination
-        currentPage={currentPage}
-        pageCount={pageCount}
-        pageSize={pageSize}
-        onPageChanged={handlePageChanged}
-        onSizeChanged={handleSizeChanged}
-      />
-    </div>
-    {
-      showModal && <TaskModal className={(showModal) ? "is-active" : ""} project={backlog[0].project} task={selectedTask} states={statuses.data} labels={labels} onClose={() => setShowModal(false)} onUpdate={refreshTasks} onDelete={refreshTasks} />
-    }
-  </>
+  return (
+    <>
+      <div className="container">
+        <Backlog
+          backlog={backlog}
+          onTaskClick={(task) => {
+            setSelectedTask(task);
+            setShowModal(true);
+          }}
+        />
+        <Pagination
+          currentPage={currentPage}
+          pageCount={pageCount}
+          pageSize={pageSize}
+          onPageChanged={handlePageChanged}
+          onSizeChanged={handleSizeChanged}
+        />
+      </div>
+      {showModal && (
+        <TaskModal
+          className={showModal ? "is-active" : ""}
+          project={backlog[0].project}
+          task={selectedTask}
+          states={statuses.data}
+          labels={labels}
+          onClose={() => setShowModal(false)}
+          onUpdate={refreshTasks}
+          onDelete={refreshTasks}
+        />
+      )}
+    </>
   );
 }

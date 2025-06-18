@@ -1,10 +1,10 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getTasksByProject } from '../../queries/getTasksByProject';
-import { Board } from '../../components/app/board/Board';
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { getTasksByProject } from "../../queries/getTasksByProject";
+import { Board } from "../../components/app/board/Board";
 
-export const Route = createFileRoute('/projects/$projectSlug')({
+export const Route = createFileRoute("/projects/$projectSlug")({
   loader: async ({ params }) => {
-    const slug = params.projectSlug
+    const slug = params.projectSlug;
     const data = await getTasksByProject(params.projectSlug);
     if (!data || !Array.isArray(data.data)) {
       throw notFound();
@@ -13,12 +13,10 @@ export const Route = createFileRoute('/projects/$projectSlug')({
   },
   component: RouteComponent,
   notFoundComponent: () => <div>Project not found</div>,
-})
+});
 
 function RouteComponent() {
-  const [data, slug] = Route.useLoaderData()
+  const [data, slug] = Route.useLoaderData();
 
-  return (
-    <Board tasks={data.data} projectSlug={slug} />
-  )
+  return <Board tasks={data.data} projectSlug={slug} />;
 }
