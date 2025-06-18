@@ -71,8 +71,8 @@ export function Board({ tasks, projectSlug }) {
                             </select>
                         </div>
                     </div>
-                    <button onClick={() => { setSelectedTask(null); setShowModal(true); }} className="button is-primary mx-1">Add new task</button>
-                    <button className="button is-link mx-1"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} className="link">Backlog</Link></button>
+                    <button onClick={() => { setSelectedTask(null); setShowModal(true); }} className="button is-primary m-1">Add new task</button>
+                    <button className="button is-link m-1"><Link to="/projects/$projectSlug/backlog" params={{ projectSlug: taskList[0].project.slug }} className="link">Backlog</Link></button>
                 </header>
                 {taskList?.length > 0 ? (
                     <h1 className="title has-text-left">Active project {taskList[0].project.Title}</h1>
@@ -80,7 +80,7 @@ export function Board({ tasks, projectSlug }) {
                     <h1 className="title has-text-left">Loading project...</h1>
                 )}
 
-                <div className='columns message' >
+                <div className='columns is-desktop' >
                     {statuses.map(status => {
                         if (status.Title !== "Backlog") {
                             return (

@@ -3,7 +3,7 @@ import { Card } from "./Card";
 export function Column({ status, tasks, onTaskClick }) {
 
     return (
-        <div key={status.id} className='column is-on-quarter'>
+        <div key={status.id} className='column'>
             <div className={status.Title === "To do" ? "message is-info" : status.Title === "In progress" ? "message is-danger" : status.Title === "Ready for Review" ? "message is-warning" : status.Title === "Done" ? "message is-success" : "message"}>
                 <div className="message-header">
                     <p>{status.Title}</p>

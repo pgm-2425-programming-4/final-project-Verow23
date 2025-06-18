@@ -13,9 +13,9 @@
   display: flex
 }
 
-.columns {
+/* .columns {
   display: flex;
-}
+} */
 
 .backlog-button {
   float: right;
