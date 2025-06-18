@@ -21,5 +21,8 @@ function About() {
             <p>I am a student at ArteveldeHogeschool Ghent.</p>
             <p>Find me on <a href="https://www.linkedin.com/in/v%C3%A9ronique-waroux-01146b141/" target='_blank'>LinkedIn</a>!</p>
         </section>
+        <section>
+            <p className='is-size-7 is-italic'>Disclaimer: Majority of tasks on this kanban board were generated using AI.</p>
+        </section>
     </div>)
 }
