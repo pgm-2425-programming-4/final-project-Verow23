@@ -19,7 +19,7 @@ export function Backlog({ backlog, onTaskClick }) {
           backlog.map((task) => (
             <tr key={task.id} onClick={() => onTaskClick(task)} className="is-clickable">
               <td>{task.Title}</td>
-              <td>
+              <td className="has-text-centered">
                 {task.labels.map((label) => <p key={label.id} className={label.Title === "Front-end" ? "tag is-primary is-light mx-1" : label.Title === "Back-end" ? "tag is-link is-light mx-1" : label.Title === "Urgent" ? "tag is-danger is-light mx-1" : "tag is-light mx-1"}><span className="icon">
                   <i className="fa-solid fa-tag"></i>
                 </span>{label.Title}</p>)}

@@ -100,10 +100,10 @@ export function TaskModal({ task, onUpdate, onDelete, states, onClose, labels, p
             <div className="modal-background">
                 <div className="modal-card">
                     <header className="modal-card-head">
-                        <p className="modal-card-title">{project.Title}</p>
+                        <p className="modal-card-title has-text-centered">{project.Title}</p>
                     </header>
                     <section className="modal-card-body">
-                        <h2 className="subtitle">{task ? "Edit task" : "New task"}</h2>
+                        <h2 className="subtitle has-text-centered">{task ? "Edit task" : "New task"}</h2>
                         <div className="form">
                             <label className="label">Title</label>
                             <input className="input" name="title" value={form.title} onChange={handleChange} placeholder="Title" />
