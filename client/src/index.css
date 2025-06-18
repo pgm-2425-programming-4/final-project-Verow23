@@ -13,10 +13,6 @@
   display: flex
 }
 
-/* .columns {
-  display: flex;
-} */
-
 .backlog-button {
   float: right;
 }
@@ -45,4 +41,16 @@
 
 .navbar-menu {
   flex-direction: column;
+}
+
+@media (max-width: 64rem) {
+  .root {
+    padding: 0;
+  }
+}
+
+@media (max-width: 48.0625rem) {
+  .modal-card {
+    margin: 1rem 0 0 0
+  }
 }

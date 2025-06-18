@@ -1,6 +1,6 @@
 export function Backlog({ backlog, onTaskClick }) {
 
-  return (
+  return (<div className="table-container">
     <table className="table is-striped container">
       {backlog.length === 0 ? <caption className="title">Backlog</caption> : <caption className="title">Backlog for {backlog[0].project.Title}</caption>}
       <thead>
@@ -30,5 +30,6 @@ export function Backlog({ backlog, onTaskClick }) {
         )}
       </tbody>
     </table>
+  </div>
   );
 }
