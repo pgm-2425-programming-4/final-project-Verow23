@@ -42,3 +42,7 @@
   margin: 0 2rem;
   border: .0625rem solid hsl(0, 0%, 71%);
 }
+
+.navbar-menu {
+  flex-direction: column;
+}
