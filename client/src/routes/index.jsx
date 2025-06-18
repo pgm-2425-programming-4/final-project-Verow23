@@ -6,8 +6,8 @@ export const Route = createFileRoute('/')({
 
 function Index() {
     return (
-        <div className="p-2">
-            <h3>Welcome to my Kanban board!</h3>
+        <div>
+            <h3 className='subtitle is-4'>Welcome to my Kanban board! Select a project from the menu.</h3>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router"
 
 export function DynamicRoutes({ projects }) {
-    console.log(projects)
     return (
         <>
             <p className="menu-label">Projects</p>

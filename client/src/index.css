@@ -1,5 +1,17 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 64rem) {
+  #root {
+    padding: 2rem 2rem 2rem 0;
+  }
+}
+
 .flex {
   display: flex;
   flex-direction: column;
@@ -13,10 +25,6 @@
   display: flex
 }
 
-.columns {
-  display: flex;
-}
-
 .backlog-button {
   float: right;
 }
@@ -24,6 +32,11 @@
 .form {
   display: flex;
   flex-direction: column;
+}
+
+.card {
+  padding: 2em;
+  text-align: center;
 }
 
 .modal-card-foot {
@@ -41,4 +54,28 @@
 .line {
   margin: 0 2rem;
   border: .0625rem solid hsl(0, 0%, 71%);
+}
+
+.navbar-menu {
+  flex-direction: column;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.select-backlog-pagination {
+  padding-left: 0.25rem;
+}
+
+@media (max-width: 64rem) {
+  .root {
+    padding: 0;
+  }
+}
+
+@media (max-width: 48.0625rem) {
+  .modal-card {
+    margin: 1rem 0 0 0
+  }
 }
