@@ -1,5 +1,17 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 64rem) {
+  #root {
+    padding: 2rem 2rem 2rem 0;
+  }
+}
+
 .flex {
   display: flex;
   flex-direction: column;
