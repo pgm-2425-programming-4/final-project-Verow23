@@ -65,7 +65,7 @@ export function Pagination({
 
   return (
     <div className="pagination" role="navigation" aria-label="pagination">
-      <div className="select">
+      <div className="select select-backlog-pagination">
         <select
           defaultValue={pageSize}
           onChange={() => onSizeChanged(event.target.value)}

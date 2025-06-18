@@ -43,6 +43,14 @@
   flex-direction: column;
 }
 
+.container {
+  overflow: hidden;
+}
+
+.select-backlog-pagination {
+  padding-left: 0.25rem;
+}
+
 @media (max-width: 64rem) {
   .root {
     padding: 0;
